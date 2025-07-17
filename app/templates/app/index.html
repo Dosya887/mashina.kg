@@ -1,0 +1,23 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Cars</title>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+</head>
+<body>
+    <div class="grid grid-cols-5">
+        {% for car in cars %}
+        <a href="{% url 'car_info' car.id %}" class="cursor-pointer">
+            <div class="p-3 flex flex-col gap-3">
+                <h2 class="p-0">{{ car.name }}</h2>
+                <img src="{{ car.image.url }}" alt="Car image" class="h-[150px] w-[220px] object-cover">
+                <h4>Цена: {{car.price}}$</h4>
+                <h4>Категория: {{car.category}}</h4>
+            </div>
+        </a>
+        {% endfor %}
+    </div>
+</body>
+</html>

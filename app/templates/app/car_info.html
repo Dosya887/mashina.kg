@@ -1,0 +1,19 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{{car.name}}</title>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+</head>
+<body>
+    <div class="h-screen w-screen bg-[url('{{car.image.url}}')] bg-cover bg-center bg-no-repeat">
+        <div class="p-3 flex flex-col items-center gap-3">
+            <p class="text-2xl text-white bg-black/50 p-2 rounded">Бренд: {{car.name}}</p>
+            <p class="text-xl text-white bg-black/50 p-2 rounded">Модель: {{car.model}}</p>
+            <p class="text-xl text-white bg-black/50 p-2 rounded">Цена: {{car.price}} $</p>
+            <p class="text-md text-white bg-black/50 p-2 rounded"> Описание: {{car.discription}}</p>
+        </div>
+    </div>
+</body>
+</html>
