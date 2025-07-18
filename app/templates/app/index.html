@@ -7,6 +7,11 @@
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
 </head>
 <body>
+    <p>Для добавления объявления нажмите кнопку ниже</p>
+    <a href="{% url 'add_car' %}">
+        <button style="background-color: aquamarine">Добавить объявление</button>
+    </a>
+
     <div class="grid grid-cols-5">
         {% for car in cars %}
         <a href="{% url 'car_info' car.id %}" class="cursor-pointer">

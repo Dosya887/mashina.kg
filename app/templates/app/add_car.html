@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Добавление обьявление</title>
+</head>
+<body>
+  <form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    <label>Название: </label>
+    <input type="text" name="name"><br><br>
+    <label>Модель: </label>
+    <input type="text" name="model"><br><br>
+    <label>Год выпуска: </label>
+    <input type="number" name="year"><br><br>
+    <label>Категория:</label>
+      <select name="category">
+        {% for cat in categories %}
+          <option value="{{ cat.id }}">{{ cat.name }}</option>
+        {% endfor %}
+      </select><br><br>
+    <label>Цена: </label>
+    <input type="number" name="price"><br><br>
+    <label>Описание: </label>
+    <input type="text" name="description"><br><br>
+    <label>Загрузите фотографию: </label>
+    <input type="file" id="image" name="image" accept="image/png, image/jpeg" />
+
+    <button type="submit">
+        Создать
+    </button>
+
+
+
+  </form>
+</body>
+</html>
