@@ -49,7 +49,6 @@ def delete_car(request, car_id):
 def update_car(request, car_id):
     car = get_object_or_404(Car, id=car_id)
     if request.method == 'POST':
-        print(request.POST, 'sex')
         car.name = request.POST.get('name')
         car.model = request.POST.get('model')
         car.price = request.POST.get('price')
