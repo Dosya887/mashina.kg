@@ -9,21 +9,23 @@
 <body>
 <div class="p-2">
     {% if user.is_authenticated %}
-        <a href="{% url 'add_car' %}">Добавить объявление</a>
+        <a href="{% url 'add_car' %}">
+            <button class="bg-yellow-300 p-2 rounded-md cursor-pointer">Добавить обьявление</button>
+        </a>
     {% endif %}
 
     <div class="flex justify-end gap-2 items-center">
         {% if not request.user.is_authenticated %}
             <a href="{% url 'register' %}">
-                <button style="background-color: cadetblue" type="button" class="btn btn-primary">Регистрация</button>
+                <button class="bg-blue-400 p-2 rounded-md cursor-pointer">Регистрация</button>
             </a>
             <a href="{% url 'login' %}">
-                <button style="background-color: #28a745" type="button" class="btn btn-primary">Войти</button>
+                <button class="bg-green-400 p-2 rounded-md cursor-pointer">Войти</button>
             </a>
         {% else %}
-            <h1 class="text-lg font-semibold">{{ request.user.username }}</h1>
+            <h1 class="text-lg font-semibold">Авторизован: {{ request.user.username }}</h1>
             <a href="{% url 'logout' %}">
-                <button style="background-color: #dc3545" type="button" class="btn btn-primary">Выйти</button>
+                <button class="bg-red-500 p-2 rounded-md cursor-pointer">Выйти</button>
             </a>
         {% endif %}
     </div>

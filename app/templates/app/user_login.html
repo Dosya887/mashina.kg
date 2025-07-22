@@ -3,17 +3,30 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
 </head>
 <body>
-  <form method="post" action=".">
-    {% csrf_token %}
-    <h5>Логин</h5>
-    <input type="text" name="username"><br><br>
-    <h5>Пароль</h5>
-    <input type="password" name="password"><br><br>
+    <div
+        class="flex justify-center items-center gap-5 bg-red-300 h-screen
+        bg-[url('https://w0.peakpx.com/wallpaper/225/762/HD-wallpaper-spring-in-the-woods-forest-spring-trees-meadow-8k.jpg')]
+        bg-cover bg-center bg-no-repeat
+    ">
+      <form method="post" action="." class="bg-white p-5 rounded-3xl flex flex-col gap-2">
+        {% csrf_token %}
+        <p class="text-xl">Логин</p>
+        <input class="border border-black p-2 rounded " type="text" name="username">
+        <p class="text-xl">Пароль</p>
+        <input class="border border-black p-2 rounded " type="password" name="password">
 
-    <button type="submit">Войти</button>
-
-  </form>
+          <div class="flex justify-center items-center">
+              <button
+                class="text-white font-bold py-3 px-8 rounded-xl shadow-lg transition duration-300 hover:opacity-90 cursor-pointer"
+                style="background: linear-gradient(to bottom, #E40303, #FF8C00, #FFED00, #008026, #004DFF, #750787);"
+              >
+                Войти
+              </button>
+          </div>
+      </form>
+    </div>
 </body>
 </html>
