@@ -3,6 +3,7 @@ from unicodedata import category
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.decorators import login_required
 
 from django.shortcuts import render, redirect, get_object_or_404
 from .models import Car, Category
@@ -16,8 +17,10 @@ def car_info(request, car_id):
     car = Car.objects.get(id=car_id)
     return render(request=request, template_name='app/car_info.html', context={'car': car})
 
+@login_required
 def add_car(request):
     if request.method == 'POST':
+        # user = request.user
         name = request.POST.get('name')
         model = request.POST.get('model')
         price = request.POST.get('price')
@@ -29,6 +32,7 @@ def add_car(request):
         category = Category.objects.get(id=category_id)
 
         Car.objects.create(
+            user=request.user,
             name=name,
             model=model,
             price=price,
@@ -100,4 +104,3 @@ def user_logout(request):
     logout(request)
     messages.success(request, 'Вы успешно вышли из аккаунта')
     return redirect('show_display')
-

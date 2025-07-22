@@ -1,3 +1,4 @@
+from django.contrib.auth.models import User
 from django.db import models
 
 
@@ -8,6 +9,7 @@ class Category(models.Model):
 
 
 class Car(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
     name = models.CharField(max_length=100)
     model = models.CharField(max_length=100)
     category = models.ForeignKey(Category, on_delete=models.PROTECT)
