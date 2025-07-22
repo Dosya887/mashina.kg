@@ -1,17 +1,25 @@
 {% load static %}
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns="http://www.w3.org/1999/html">
 <head>
     <meta charset="UTF-8">
     <title>Cars</title>
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
 </head>
 <body>
-    <p>Для добавления объявления нажмите кнопку ниже</p>
+<div class="p-2">
     <a href="{% url 'add_car' %}">
         <button style="background-color: aquamarine">Добавить объявление</button>
     </a>
-
+    <div class="flex justify-end gap-2 items-center">
+        {% if request.user.is_authenticated %}
+        <a href="{% url 'register' %}"><button style="background-color: cadetblue" type="button" class="btn btn-primary">Регистрация</button></a>
+        <a href="{% url 'login' %}"><button style="background-color: #28a745" type="button" class="btn btn-primary">Войти</button></a>
+        {% else %}
+        <h1>{{ request.user.username }}</h1>
+        <a href="{% url 'logout' %}"><button style="background-color: #dc3545" type="button" class="btn btn-primary">Выйти</button> </a>
+        {% endif %}
+    </div>
     <div class="grid grid-cols-5">
         {% for car in cars %}
         <a href="{% url 'car_info' car.id %}" class="cursor-pointer">
@@ -24,5 +32,6 @@
         </a>
         {% endfor %}
     </div>
+</div>
 </body>
 </html>

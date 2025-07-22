@@ -1,5 +1,8 @@
 from email.mime import image
 from unicodedata import category
+from django.contrib.auth.forms import UserCreationForm
+from django.contrib import messages
+from django.contrib.auth import authenticate, login, logout
 
 from django.shortcuts import render, redirect, get_object_or_404
 from .models import Car, Category
@@ -67,4 +70,34 @@ def update_car(request, car_id):
     categories = Category.objects.all()
     return render(request, 'app/update_car.html', {'car': car, 'categories': categories})
 
+def user_register(request):
+    if request.method == 'POST':
+        form = UserCreationForm(request.POST)
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'Вы успешно создали аккаунт')
+            return redirect('show_display')
+        for field, errors in form.errors.items():
+            for error in errors:
+                messages.error(request, f'{errors}')
+    form = UserCreationForm()
+    return render(request, 'app/user_register.html', {'form': form})
+
+def user_login(request):
+    if request.method == 'POST':
+        username = request.POST['username']
+        password = request.POST['password']
+
+        user = authenticate(request=request, username=username, password=password)
+        if user:
+            login(request, user)
+            messages.success(request, 'Вы успешно вошли в систему')
+            return redirect('show_display')
+        messages.error(request, 'Неправильный логин или пароль')
+    return render(request, 'app/user_login.html')
+
+def user_logout(request):
+    logout(request)
+    messages.success(request, 'Вы успешно вышли из аккаунта')
+    return redirect('show_display')
 
